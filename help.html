@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - DreamWebsites</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f111a; --bg-secondary: #161b22; --text-primary: #f0f6fc; --text-secondary: #8b949e;
+            --accent-primary: #3b82f6; --gradient-primary: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --glass-bg: rgba(255, 255, 255, 0.03); --glass-border: rgba(255, 255, 255, 0.08);
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+        .navbar-premium { background: rgba(15, 17, 26, 0.8) !important; backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); sticky; top: 0; z-index: 1000; }
+        .text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px; }
+        .accordion-item { background: transparent; border: 1px solid var(--glass-border); color: var(--text-primary); margin-bottom: 10px; border-radius: 10px !important; }
+        .accordion-button { background: var(--glass-bg); color: var(--text-primary); }
+        .accordion-button:not(.collapsed) { background: var(--accent-primary); color: white; }
+        footer { border-top: 1px solid var(--glass-border); background: var(--bg-secondary); margin-top: auto; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-premium px-4">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="demo.html">
+            <i class="fas fa-globe text-primary"></i> <span class="text-gradient">DreamWebsites</span>
+        </a>
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav gap-2">
+                <li class="nav-item"><a class="nav-link text-secondary" href="demo.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-secondary" href="websites.html">Websites</a></li>
+                <li class="nav-item"><a class="nav-link text-secondary" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link active text-white" href="help.html">Help</a></li>
+            </ul>
+        </div>
+        <div class="d-flex gap-3">
+            <a href="login.html" class="btn btn-premium-outline rounded-pill text-white border-primary px-3 py-2">Login</a>
+            <a href="signup.html" class="btn btn-premium rounded-pill">Sign Up</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-5">Help <span class="text-gradient">Center</span></h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="glass-panel">
+                <h4 class="mb-4">Frequently Asked Questions</h4>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I purchase a website?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-secondary">
+                                Simply browse the marketplace, click on the website you like, and follow the checkout process. Once payment is confirmed, you will receive the files and transfer instructions.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Can I request customizations?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-secondary">
+                                Yes! Most developers offer customization services. You can contact them directly through the platform after purchase.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Is my payment secure?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-secondary">
+                                Absolutely. We use industry-standard encryption and trusted payment gateways like Stripe and PayPal to ensure your data is safe.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center py-4 mt-auto">
+    <p class="mb-0 text-secondary">&copy; 2024 DreamWebsites. All rights reserved.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
