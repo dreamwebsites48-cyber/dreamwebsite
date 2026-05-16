@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websites - DreamWebsites</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f111a;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #1f242e;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --gradient-primary: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --gradient-success: linear-gradient(135deg, #059669, #10b981);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-premium {
+            background: rgba(15, 17, 26, 0.8) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .text-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: var(--glass-shadow);
+            transition: 0.3s;
+        }
+
+        .site-card {
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 24px 60px rgba(99, 102, 241, 0.22);
+        }
+
+        .card-carousel {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-premium {
+            background: var(--gradient-primary);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 28px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-premium-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--accent-primary);
+            border-radius: 50px;
+            padding: 10px 26px;
+            font-weight: 600;
+        }
+
+        footer {
+            border-top: 1px solid var(--glass-border);
+            background: var(--bg-secondary);
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-premium px-4">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-globe text-primary"></i> <span class="text-gradient">DreamWebsites</span>
+            </a>
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link text-secondary" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active text-white" href="websites.html">Websites</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary" href="help.html">Help</a></li>
+                </ul>
+            </div>
+            <div class="d-flex gap-3">
+                <a href="login.html" class="btn btn-premium-outline rounded-pill">Login</a>
+                <a href="signup.html" class="btn btn-premium rounded-pill">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h2 class="text-center fw-bold mb-5">Explore Our <span class="text-gradient">Marketplace</span></h2>
+        <div class="row g-4" id="websitesGrid">
+            <!-- Websites will be injected here via JavaScript -->
+        </div>
+    </div>
+
+    <footer class="text-center py-4 mt-auto">
+        <p class="mb-0 text-secondary">&copy; 2024 DreamWebsites. All rights reserved.</p>
+    </footer>
+
+    <!-- ========== PREMIUM VIEW MODAL ========== -->
+    <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content glass-panel border-0"
+                style="background: rgba(15, 17, 26, 0.98); backdrop-filter: blur(30px);">
+                <div class="modal-header border-0 pb-0">
+                    <div>
+                        <h4 class="modal-title fw-bold text-white mb-1" id="viewModalLabel">Website Preview</h4>
+                        <p class="text-secondary small mb-0" id="viewModalCategory">Premium Listing</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <div id="carouselExample" class="carousel slide rounded-4 overflow-hidden shadow-lg" data-bs-ride="carousel">
+                                <div class="carousel-inner" id="modalCarouselInner">
+                                    <!-- Images injected here -->
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="p-3 glass-panel h-100">
+                                <h5 class="fw-bold mb-3">Gallery</h5>
+                                <div class="row g-2" id="thumbnailStrip">
+                                    <!-- Thumbnails injected here -->
+                                </div>
+                                <hr class="my-4 opacity-10">
+                                <h5 class="fw-bold mb-3">Description</h5>
+                                <p id="modalDescription" class="text-secondary small mb-4"></p>
+                                <div class="d-grid gap-2">
+                                    <a id="modalVisitBtn" href="#" target="_blank" class="btn btn-premium w-100">Visit Live Site</a>
+                                    <button class="btn btn-premium-outline w-100" data-bs-dismiss="modal">Close Preview</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ========== WEBSITE CONFIGURATION ==========
+        // Add your images here to seamlessly integrate them into the marketplace.
+        const websiteData = [
+            {
+                id: 1,
+                name: "E-Commerce Pro",
+                category: "E-Commerce",
+                price: "$299",
+                description: "A full-featured e-commerce solution with inventory management, secure payments, and responsive design.",
+                mainImage: "images/ecommerce.png",
+                gallery: [
+                    "websites-images/E-Commerce Pro 1.png",
+                    "websites-images/E-Commerce Pro 2.png",
+                    "websites-images/E-Commerce Pro 3.png",
+                    "websites-images/E-Commerce Pro 4.png",
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/E-Commerce-Pro/"
+            },
+            {
+                id: 2,
+                name: "Creative Portfolio",
+                category: "Portfolio",
+                price: "$149",
+                description: "Stunning glassmorphism design to showcase your creative work. Includes smooth animations and dark mode.",
+                mainImage: "websites-images/Creative Portfolio 1.png",
+                gallery: [
+                    "websites-images/Creative Portfolio 1.png",
+                    "websites-images/Creative Portfolio 2.png",
+                    "websites-images/Creative Portfolio 3.png",
+                    "websites-images/Creative Portfolio 4.png",
+                    "websites-images/Creative Portfolio 5.png",
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/Creative-Portfolio/"
+            },
+            {
+                id: 3,
+                name: "Tech Blog",
+                category: "Blog",
+                price: "$199",
+                description: "Optimized for SEO and readability. Perfect for tech enthusiasts and modern publishers.",
+                mainImage: "images/blog.png",
+                gallery: [
+                    "images/blog.png",
+                    "websites-images/Tech blog 1.png",
+                    "websites-images/Tech blog 2.png",
+                    "websites-images/Tech blog 3.png",
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/Tech-Blog/"
+            },
+            {
+                id: 4,
+                name: "Medical Clinic",
+                category: "Healthcare",
+                price: "$249",
+                description: "Comprehensive healthcare solution with patient booking, doctor profiles, and medical records management.",
+                mainImage: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=600",
+                gallery: [
+                    "websites-images/medecal farmasi 1.png",
+                    "websites-images/medecal farmasi 2.png",
+                    "websites-images/medecal farmasi 3.png",
+                    "websites-images/medecal farmasi 4.png",
+                    "websites-images/medecal farmasi 5.png",
+                    "websites-images/medecal farmasi 6.png",
+                    "websites-images/medecal farmasi 7.png",
+                    "websites-images/medecal farmasi 8.png",
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/Modern-Medical-Clinic/"
+            },
+            {
+                id: 5,
+                name: "University Portal",
+                category: "Education",
+                price: "$399",
+                description: "Advanced academic platform for course management, student registrations, and campus interaction.",
+                mainImage: "websites-images/university Portal 1.png",
+                gallery: [
+                    "websites-images/university Portal 1.png",
+                    "websites-images/university Portal 2.png",
+                    "websites-images/university Portal 3.png"
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/University-College-Portal/"
+            },
+            {
+                id: 6,
+                name: "Premium Beauty Parlor",
+                category: "Education",
+                price: "$189",
+                description: "A premium beauty parlor and spa offers a luxurious, comprehensive approach to grooming,",
+                mainImage: "websites-images/Premium 1.png",
+                gallery: [
+                    "websites-images/Premium 1.png",
+                    "websites-images/Premium 2.png",
+                    "websites-images/Premium 3.png",
+                    "websites-images/Premium 4.png",
+                    "websites-images/Premium 5.png",
+                    "websites-images/Premium 6.png",
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/Premium-Beauty-Parlor-Spa/"
+            },
+            {
+                id: 7,
+                name: "Elite Gym",
+                category: "Fitness",
+                price: "$159",
+                description: "High-energy fitness platform with membership tracking, class schedules, and trainer portfolios.",
+                mainImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600",
+                gallery: [
+                    "websites-images/gym 1.png",
+                    "websites-images/gym 2.png",
+                    "websites-images/gym 3.png",
+                    "websites-images/gym 4.png",
+                    "websites-images/gym 5.png",
+                    "websites-images/gym 6.png",
+                    "websites-images/gym 7.png",
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/Hardcore_Gym_Fitness_Center/"
+            },
+            {
+                id: 8,
+                name: "Artisan Bakery",
+                category: "Food & Drink",
+                price: "$179",
+                description: "Elegant bakery e-commerce site with online ordering and product showcase.",
+                mainImage: "images/bakery.png",
+                gallery: [
+                    "images/bakery.png",
+                    "https://images.unsplash.com/photo-1509440159596-0249088772ff",
+                    "https://images.unsplash.com/photo-1517433670267-08bbd4be890f",
+                    "websites-images/bakery 1.png",
+                    "websites-images/bakery 2.png",
+                    "websites-images/bakery 3.png",
+                    "websites-images/bakery 4.png",
+                    "websites-images/bakery 5.png",     
+                    "websites-images/bakery 6.png",
+                    "websites-images/bakery 7.png",    
+                ],
+                visitUrl: "https://dreamwebsites48-cyber.github.io/Artisan-Cake-Bakery-E-Commerce/index.html"
+            }
+        ];
+
+        // ========== RENDER WEBSITES ==========
+        function renderWebsites() {
+            const grid = document.getElementById('websitesGrid');
+            grid.innerHTML = websiteData.map(site => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-panel site-card">
+                        <div class="card-carousel">
+                            <img src="${site.mainImage}" alt="${site.name}">
+                            <div class="badge bg-primary position-absolute top-0 end-0 m-3">${site.category}</div>
+                        </div>
+                        <div class="p-4 flex-grow-1">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="fw-bold">${site.name}</h5>
+                                <span class="badge bg-success">${site.price}</span>
+                            </div>
+                            <p class="text-secondary small">${site.description}</p>
+                            <div class="d-flex gap-2 mt-3">
+                                <button class="btn btn-premium-outline w-100" onclick="viewWebsite(${site.id})">View</button>
+                                <a href="${site.visitUrl}" target="_blank" class="btn btn-premium w-100 text-center py-2">Visit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== MODAL LOGIC ==========
+        function viewWebsite(id) {
+            const site = websiteData.find(s => s.id === id);
+            if (!site) return;
+
+            const modalTitle = document.getElementById('viewModalLabel');
+            const modalCategory = document.getElementById('viewModalCategory');
+            const carouselInner = document.getElementById('modalCarouselInner');
+            const thumbnailStrip = document.getElementById('thumbnailStrip');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalVisitBtn = document.getElementById('modalVisitBtn');
+
+            modalTitle.innerText = site.name;
+            modalCategory.innerText = site.category;
+            modalDescription.innerText = site.description;
+            modalVisitBtn.href = site.visitUrl;
+
+            // Render Carousel
+            carouselInner.innerHTML = site.gallery.map((img, index) => `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${img}" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="Preview">
+                </div>
+            `).join('');
+
+            // Render Thumbnails
+            thumbnailStrip.innerHTML = site.gallery.map((img, index) => `
+                <div class="col-3">
+                    <img src="${img}" class="img-fluid rounded cursor-pointer ${index === 0 ? 'border border-primary' : 'opacity-75'}" 
+                         style="height: 60px; width: 100%; object-fit: cover; cursor: pointer;"
+                         onclick="goToSlide(${index}, this)" alt="Thumbnail">
+                </div>
+            `).join('');
+
+            const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+            modal.show();
+        }
+
+        function goToSlide(index, element) {
+            const carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
+            carousel.to(index);
+            
+            // Update thumbnail borders
+            document.querySelectorAll('#thumbnailStrip img').forEach(img => {
+                img.classList.remove('border', 'border-primary');
+                img.classList.add('opacity-75');
+            });
+            element.classList.add('border', 'border-primary');
+            element.classList.remove('opacity-75');
+        }
+
+        // Initial render
+        renderWebsites();
+    </script>
+</body>
+
+</html>
+
+</html>
